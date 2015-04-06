@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ReverseDictionary</string>
+
+    <string name="edit_message">Enter search parameter</string>
+    <string name="action_settings">Settings</string>
+    <string name="button_search">Search</string>
+    <string name="title_activity_rd">rd</string>
+
+    <string name="hello_world">Hello world!</string>
+</resources>
