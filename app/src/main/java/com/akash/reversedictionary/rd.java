@@ -53,14 +53,15 @@ public class rd extends ActionBarActivity {
             tokenized[i++]=token;
         }
         String arg=joinPlus(tokenized,i);
-      /*  String result = "";*/
-/*
+      /*  String result = "";
         final_function obj = new final_function();
         obj.execute(arg);
-*/
+      */
+
         String result = reqHTML(arg);
+        //String filtered_result = filterString(result);
         TextView textView = new TextView(this);
-        textView.setTextSize(10);
+        textView.setTextSize(15);
         textView.setText(result);
         setContentView(textView);
 
@@ -90,6 +91,80 @@ public class rd extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+    private String reqHTML(String arg) {
+        String result="";
+        try {
+            URL url = new URL("http://www.onelook.com/?w=*&loc=revfp2&clue="+arg);
+            HttpURLConnection con = (HttpURLConnection) url
+                    .openConnection();
+            result = readStream(con.getInputStream());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    private String readStream(InputStream in) {
+            String htmlPage = "";
+            BufferedReader reader = null;
+            try {
+                reader = new BufferedReader(new InputStreamReader(in));
+                String line = "";
+                int i=1;
+                while ((line = reader.readLine()) != null) {
+                    if(i>=49 && i<=74) {
+                        Log.d("jwsa",line);
+                        htmlPage+= "\n" + line;
+                    }
+                    i++;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        //Log.d("Jswa",htmlPage);
+        htmlPage=remove(htmlPage);
+        Log.d("jwsa",htmlPage);
+        return htmlPage;
+    }/*
+    private String filterString(String result[]){
+        String filtered_result ="";
+        for(int i=0;i<result.length;i++){
+            result[i]=remove(result[i]);
+            filtered_result+="\n"+result[i];
+        }
+        return filtered_result;
+    }*/
+
+    //it will remove html tags
+    private String remove (String str){
+        char arr[] = str.toCharArray();
+        String new_str = "";
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]=='<')
+            {
+                while(arr[i]!='>')
+                {
+                    i++;
+                }
+            }
+            else {
+                new_str += arr[i];
+            }
+        }
+        return new_str;
+    }
+}
 /*
 class final_function extends AsyncTask<String, Void, String> {
     public static String res_arr = "";
@@ -117,44 +192,3 @@ class final_function extends AsyncTask<String, Void, String> {
         return res_arr;
     }
 }*/
-
-    private String reqHTML(String arg) {
-        String result = new String();
-        try {
-            URL url = new URL("http://www.onelook.com/?w=*&loc=revfp2&clue="+arg);
-            HttpURLConnection con = (HttpURLConnection) url
-                    .openConnection();
-            result = readStream(con.getInputStream());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-    private String readStream(InputStream in) {
-            String htmlPage=new String("");
-            BufferedReader reader = null;
-            try {
-                reader = new BufferedReader(new InputStreamReader(in));
-                String line = "";
-                int i=1;
-                while ((line = reader.readLine()) != null) {
-                    if(i>=49 && i<=74) {
-                        htmlPage = htmlPage + line;
-                    }
-                    i++;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        Log.d("Jswa",htmlPage);
-        return htmlPage;
-    }
-}

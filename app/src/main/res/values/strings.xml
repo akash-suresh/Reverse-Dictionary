@@ -5,6 +5,6 @@
     <string name="action_settings">Settings</string>
     <string name="button_search">Search</string>
     <string name="title_activity_rd">rd</string>
-
+    <string name="button_return">Search again</string>
     <string name="hello_world">Hello world!</string>
 </resources>
