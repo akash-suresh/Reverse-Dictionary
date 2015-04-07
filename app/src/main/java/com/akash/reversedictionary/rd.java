@@ -61,8 +61,10 @@ public class rd extends ActionBarActivity {
         String result = reqHTML(arg);
         //String filtered_result = filterString(result);
         TextView textView = new TextView(this);
-        textView.setTextSize(10);
+        textView.setTextSize(15);
         textView.setText(result);
+        textView.setTextColor(0xfff7fff6);
+        textView.setBackgroundColor(0xff0087ff);
         setContentView(textView);
 
     }
@@ -93,8 +95,6 @@ public class rd extends ActionBarActivity {
     }
 
 
-
-
     private String reqHTML(String arg) {
         String result="";
         try {
@@ -117,7 +117,7 @@ public class rd extends ActionBarActivity {
                 while ((line = reader.readLine()) != null) {
                     if(i>=49 && i<=74) {
                         Log.d("jwsa",line);
-                        htmlPage+= "\n" + line;
+                        htmlPage+= "\n     " + line;
                     }
                     i++;
                 }

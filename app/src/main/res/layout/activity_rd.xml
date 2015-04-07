@@ -1,16 +1,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ff0087ff"
     android:orientation="vertical"
-    tools:context="com.akash.reversedictionary.rd">
+    tools:context=".rd"
+    >
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_return"
-        android:layout_marginTop="70dp"
-        android:onClick="goBack" />
+    <TextView android:text="@string/hello_world"
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:id="@+id/result_box"
+        android:textColor="#fff7fff6"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ff0087ff"
+        android:layout_margin="20dp"
+        android:textSize="15dp"
+    />
+
 </LinearLayout>
