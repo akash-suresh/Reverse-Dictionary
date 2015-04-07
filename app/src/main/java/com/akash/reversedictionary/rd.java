@@ -1,9 +1,11 @@
 package com.akash.reversedictionary;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -28,6 +30,12 @@ import java.net.URL;
 import static android.content.Intent.*;
 
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+
 public class rd extends ActionBarActivity {
 
     @Override
@@ -45,6 +53,11 @@ public class rd extends ActionBarActivity {
             tokenized[i++]=token;
         }
         String arg=joinPlus(tokenized,i);
+      /*  String result = "";*/
+/*
+        final_function obj = new final_function();
+        obj.execute(arg);
+*/
         String result = reqHTML(arg);
         TextView textView = new TextView(this);
         textView.setTextSize(10);
@@ -62,6 +75,48 @@ public class rd extends ActionBarActivity {
         }
         return joinedString;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+/*
+class final_function extends AsyncTask<String, Void, String> {
+    public static String res_arr = "";
+    private Exception exception;
+    @Override
+    protected String doInBackground(String... arg) {
+
+        try {
+            Document doc = Jsoup.connect("http://www.onelook.com/?w=*&loc=revfp2&clue="+arg).get();
+            Elements links = doc.select("td a[href]");
+            int i=0;
+            for (Element link : links) {
+                if(i>=0 && i<=100){
+                    res_arr += link.text();
+                    res_arr += "\n";
+                }
+                i++;
+                //print(" * a: <%s>  (%s)", link.attr("abs:href"), trim(link.text(), 35));
+            }
+        } catch (Exception e) {
+            this.exception = e;
+            return null;
+        }
+        Log.d("Jswa",res_arr);
+        return res_arr;
+    }
+}*/
 
     private String reqHTML(String arg) {
         String result = new String();
@@ -81,8 +136,12 @@ public class rd extends ActionBarActivity {
             try {
                 reader = new BufferedReader(new InputStreamReader(in));
                 String line = "";
+                int i=1;
                 while ((line = reader.readLine()) != null) {
-                    htmlPage=htmlPage+line;
+                    if(i>=49 && i<=74) {
+                        htmlPage = htmlPage + line;
+                    }
+                    i++;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -95,20 +154,7 @@ public class rd extends ActionBarActivity {
                     }
                 }
             }
+        Log.d("Jswa",htmlPage);
         return htmlPage;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
