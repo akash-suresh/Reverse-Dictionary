@@ -61,7 +61,7 @@ public class rd extends ActionBarActivity {
         String result = reqHTML(arg);
         //String filtered_result = filterString(result);
         TextView textView = new TextView(this);
-        textView.setTextSize(15);
+        textView.setTextSize(10);
         textView.setText(result);
         setContentView(textView);
 
