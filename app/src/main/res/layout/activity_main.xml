@@ -7,13 +7,22 @@
     android:background="#ff0087ff"
     >
 
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:src="@drawable/photo" />
+
    <EditText
        android:id="@+id/edit_message"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:hint="@string/edit_message"
        android:layout_gravity="center"
-       android:layout_marginTop="50dp"
+       android:layout_marginTop="40dp"
        android:textColor="#fffafffb"
        android:textColorHint="#fffffdfb"
 
@@ -25,10 +34,10 @@
         android:text="@string/button_search"
         android:onClick="sendMessage"
         android:layout_gravity="center"
-
         android:background="@drawable/shape"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="80dp"
         style="?android:attr/borderlessButtonStyle"
         />
+
 
 </LinearLayout>
