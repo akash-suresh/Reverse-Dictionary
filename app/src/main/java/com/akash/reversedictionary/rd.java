@@ -57,8 +57,13 @@ public class rd extends ActionBarActivity {
         final_function obj = new final_function();
         obj.execute(arg);
       */
-
-        String result = reqHTML(arg);
+        String result;
+        if(arg.length()>0) {
+            result = reqHTML(arg);
+        }
+        else{
+            result = "\n\n\tNo search phrase entered";
+        }
         //String filtered_result = filterString(result);
         TextView textView = new TextView(this);
         textView.setTextSize(15);
